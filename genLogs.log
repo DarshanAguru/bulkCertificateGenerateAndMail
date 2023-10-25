@@ -1,0 +1,39 @@
+2023-10-20 21:24:28,248 INFO USER: Darshan Aguru Exited, user selected NO -> cleaning the directory.
+2023-10-24 09:00:50,067 INFO USER: Darshan Aguru, Exited, user selected NO -> cleaning the directory.
+2023-10-24 09:17:24,868 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-24 09:18:40,787 INFO USER: Darshan Aguru, Exited, user selected NO -> cleaning the directory.
+2023-10-24 09:23:08,678 ERROR USER: Darshan Aguru, OpenCV(4.8.1) D:\a\opencv-python\opencv-python\opencv\modules\highgui\src\window_w32.cpp:1473: error: (-27:Null pointer) NULL window: 'output' in function 'cvResizeWindow'
+
+2023-10-24 09:23:51,895 ERROR USER: Darshan Aguru, OpenCV(4.8.1) D:\a\opencv-python\opencv-python\opencv\modules\highgui\src\window_w32.cpp:1473: error: (-27:Null pointer) NULL window: 'template' in function 'cvResizeWindow'
+
+2023-10-24 09:24:30,662 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-24 09:25:45,106 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-24 09:26:43,282 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-24 09:27:39,927 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-24 09:28:23,969 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-24 09:31:29,051 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-24 09:33:54,097 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-24 09:36:03,424 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-24 09:37:15,772 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-24 09:40:55,587 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-24 09:42:06,526 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-24 09:43:01,392 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-24 09:44:46,250 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-24 09:49:26,527 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-24 09:50:12,235 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-24 09:50:32,019 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-24 13:58:08,318 ERROR USER: Darshan Aguru, Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2023-10-24 13:59:08,854 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-24 14:35:21,691 INFO USER: Darshan Aguru, Exited, user selected NO -> cleaning the directory.
+2023-10-24 14:35:46,640 INFO USER: Darshan Aguru, Exited, user selected NO -> cleaning the directory.
+2023-10-24 14:37:01,901 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-25 21:35:34,393 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-25 21:36:40,540 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-25 21:37:22,225 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-25 21:37:53,741 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-25 21:44:46,098 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-25 21:46:03,007 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-25 21:59:28,321 INFO USER: Darshan Aguru, Exited, user selected NO -> cleaning the directory.
+2023-10-25 22:00:30,111 INFO USER: Darshan Aguru, Exited, user selected NO -> cleaning the directory.
+2023-10-25 22:02:51,464 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-25 22:13:12,928 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
