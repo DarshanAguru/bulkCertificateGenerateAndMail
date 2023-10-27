@@ -14,36 +14,27 @@ import logging
 coords =[0,0]
 
 def click_event(event, x, y, flags, params):
-    # checking for left mouse clicks
+    
     if event == cv2.EVENT_LBUTTONDOWN:
-        # displaying the coordinates
-        # on the Shell
         print(x, ' ', y)
         coords[0]=x
         coords[1]=y
         cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-        # cv2.resizeWindow('image', 1020, 768)
-
-        cv2.circle(img,(x,y),3,(255,0,0),2)
+        cv2.resizeWindow('image', 1020, 768)
+        cv2.circle(img,(x,y),4,(255,0,0),2)
         cv2.imshow('image', img)
 
 
 
 
-        # checking for right mouse clicks
-    if event == cv2.EVENT_RBUTTONDOWN:
-        # displaying the coordinates
-        # on the Shell
+      
+    if event == cv2.EVENT_RBUTTONDOWN:   
         print(x, ' ', y)
         coords[0] = x
         coords[1] = y
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        b = img[y, x, 0]
-        g = img[y, x, 1]
-        r = img[y, x, 2]
         cv2.namedWindow('image',cv2.WINDOW_NORMAL)
         cv2.resizeWindow('image',1020,768)
-        cv2.circle(img,(x,y),3,(255,0,0),2)
+        cv2.circle(img,(x,y),4,(0,0,255),2)
         cv2.imshow('image', img)
 
 
@@ -61,6 +52,14 @@ def clean():
         exit(0)
 
 
+def verify(emails,names,files):
+    if not (len(emails) == len(names) == len(files)):
+        return False
+
+    for name,file in zip(names,files):
+        if name.strip() != file[:file.index(".")].strip():
+            return False
+    return True
 
 
 
@@ -94,7 +93,7 @@ def send_Mail(names_ls, emails, filenames, mail_subject, mail_body):
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         server.login(sender_email, password)
-
+        srno = 0
         for i in range(len(names_ls)):
             name = names_ls[i]
             email = emails[i]
@@ -124,7 +123,8 @@ def send_Mail(names_ls, emails, filenames, mail_subject, mail_body):
             message.attach(part)
             text = message.as_string()
             server.sendmail(sender_email, receiver_email, text)
-            print("Mail sent to name: {}\t on email: {}\t with file name: {}\t successfully.".format(name,email,filename))
+            print("{} Mail sent to name: {}\t on email: {}\t with file name: {}\t successfully.".format(srno,name,email,filename))
+            srno += 1
 
 
 
@@ -149,7 +149,8 @@ if __name__ == "__main__":
             msg_str = '''
             !!! PLEASE READ !!!
             Please left-click where you'd like to insert your text. 
-            A new window with a marked circle will open at the selected position. 
+            A new window with a marked circle will open at
+            the selected position. 
             If you're satisfied, close all the windows; 
             otherwise, close the second window 
             and repeat the process by left-clicking on the image. 
@@ -163,12 +164,14 @@ if __name__ == "__main__":
             cv2.setMouseCallback('template',click_event)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
-        choice = easygui.choicebox("Choose from menu (excel file): ",choices=dirlist)
+            easygui.msgbox(f"Your coordinates are:\nX:{coords[0]}\tY:{coords[1]}\n","Coordinates")
+        choice = easygui.choicebox("*MAKE SURE THE COLUMNS ARE ALPHABETICALLY SORTD BY NAMES*\nChoose from menu (excel file): ",choices=dirlist)
         df = pd.read_excel(choice)
         cols_list = df.columns.tolist()
         colName = easygui.choicebox("Please select the column name: ",choices=cols_list)
         name_ls = df[colName].tolist()
         certificate_gen(name_ls,location)
+        easygui.msgbox(f"{len(name_ls)} Certificates Generated successfully","Generation Completed")
     except Exception as e:
         msg = "USER: " +os.getlogin()+", "+ str(e)
         logging.error(msg)
@@ -176,7 +179,7 @@ if __name__ == "__main__":
         exit(0)
 
     try:
-        opt = easygui.boolbox("Do you want to send email?",choices=["[Y]es","[N]o"],default_choice="[Y]es", cancel_choice="[N]o")
+        opt = easygui.boolbox("Do you want to send email? (Please verify certificates before sending email)",choices=["[Y]es","[N]o"],default_choice="[Y]es", cancel_choice="[N]o")
         if opt:
             cName =  easygui.choicebox("Please select the column name: ", choices=cols_list)
             emails = df[cName].tolist()
@@ -184,12 +187,16 @@ if __name__ == "__main__":
             mail_subject = easygui.textbox("Enter the Subject","Email: Subject",text="Your Event Participation Certificate Is Here!")
             easygui.msgbox("Please put {} in the email body where ever you want to mention NAME of the Participant. Default format is given for you","INSTRUCTION")
             mail_body = easygui.textbox("Enter mail body","Email: Body",text="Dear {},\nWe would like to express our sincere gratitude for your active participation in the event. We are pleased to attach your participation certificate to this email.\nWe are looking forward for your partipation in our upcoming events.\nWarm Regards,\nEVENT TEAM")
+            if not verify(emails,name_ls,filenames):
+                raise ValueError("Please check the names in excel if they are alphabetically sorted.")
             send_Mail(name_ls,emails,filenames,mail_subject,mail_body)
+            easygui.msgbox(f"{len(emails)} mails sent successfully","Mail sent")
         else:
             msg = "USER: " + os.getlogin() + ", " + "Exited, selected NO -> sending email."
             logging.info(msg)
             exit(0)
     except Exception as e:
+        easygui.msgbox("Maybe the username or password is wrong or you are using personal mail.\nMake sure you are using institutional/organizational\n mail with \"allow less secure apps\" turned on","Error")
         msg = "USER: " + os.getlogin() + ", " + str(e)
         logging.error(msg)
         print(e)

@@ -37,3 +37,10 @@
 2023-10-25 22:00:30,111 INFO USER: Darshan Aguru, Exited, user selected NO -> cleaning the directory.
 2023-10-25 22:02:51,464 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
 2023-10-25 22:13:12,928 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-27 18:15:27,437 ERROR USER: Darshan Aguru, Invalid file path or buffer object type: <class 'NoneType'>
+2023-10-27 18:16:25,115 INFO USER: Darshan Aguru, Exited, selected NO -> sending email.
+2023-10-27 18:20:35,241 ERROR USER: Darshan Aguru, 'set' object has no attribute 'tolist'
+2023-10-27 18:21:53,900 ERROR USER: Darshan Aguru, (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials i9-20020aa796e9000000b0068fb9f98467sm1282212pfq.107 - gsmtp')
+2023-10-27 18:24:42,946 ERROR USER: Darshan Aguru, Please check the names in excel if they are alphabetically sorted.
+2023-10-27 18:25:42,811 ERROR USER: Darshan Aguru, Please check the names in excel if they are alphabetically sorted.
+2023-10-27 18:27:18,922 ERROR USER: Darshan Aguru, (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials fb40-20020a056a002da800b006bc189378a7sm1305153pfb.196 - gsmtp')
