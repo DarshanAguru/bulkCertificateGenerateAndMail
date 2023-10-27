@@ -3,7 +3,7 @@ import numpy as np
 from PIL import ImageFont, ImageDraw, Image
 import os
 import pandas as pd
-import email, smtplib, ssl
+import smtplib, ssl
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
@@ -129,12 +129,14 @@ def send_Mail(names_ls, emails, filenames, mail_subject, mail_body):
 
 
 if __name__ == "__main__":
-
+    
     logging.basicConfig(level=logging.INFO, filename="genLogs.log", filemode="a+", format="%(asctime)s %(levelname)s %(message)s")
     clean()
     dirlist = os.listdir(".")
     try:
         location = easygui.choicebox("Choose from menu (template image)(.jpg file): ", choices=dirlist)
+        if not location:
+            raise RuntimeError("No input given by user")
         hasCoords = easygui.boolbox("Do you have coordinates?",title="Coordinates?",choices=["[Y]es","[N]o"],default_choice="[Y]es",cancel_choice="[N]o")
         if hasCoords:
             coordinates = easygui.multenterbox("Enter Coordinates","Coordinates",["X-Coords: ","Y-Coords: "])
@@ -166,9 +168,13 @@ if __name__ == "__main__":
             cv2.destroyAllWindows()
             easygui.msgbox(f"Your coordinates are:\nX:{coords[0]}\tY:{coords[1]}\n","Coordinates")
         choice = easygui.choicebox("*MAKE SURE THE COLUMNS ARE ALPHABETICALLY SORTD BY NAMES*\nChoose from menu (excel file): ",choices=dirlist)
+        if not choice:
+            raise RuntimeError("No input given by user")
         df = pd.read_excel(choice)
         cols_list = df.columns.tolist()
         colName = easygui.choicebox("Please select the column name: ",choices=cols_list)
+        if not colName:
+            raise RuntimeError("No input given by user")
         name_ls = df[colName].tolist()
         certificate_gen(name_ls,location)
         easygui.msgbox(f"{len(name_ls)} Certificates Generated successfully","Generation Completed")
@@ -182,6 +188,8 @@ if __name__ == "__main__":
         opt = easygui.boolbox("Do you want to send email? (Please verify certificates before sending email)",choices=["[Y]es","[N]o"],default_choice="[Y]es", cancel_choice="[N]o")
         if opt:
             cName =  easygui.choicebox("Please select the column name: ", choices=cols_list)
+            if not cName:
+                raise RuntimeError("No input given by user")    
             emails = df[cName].tolist()
             filenames = os.listdir("result")
             mail_subject = easygui.textbox("Enter the Subject","Email: Subject",text="Your Event Participation Certificate Is Here!")
@@ -195,6 +203,11 @@ if __name__ == "__main__":
             msg = "USER: " + os.getlogin() + ", " + "Exited, selected NO -> sending email."
             logging.info(msg)
             exit(0)
+    except RuntimeError as re:
+        msg = "USER: " + os.getlogin() + ", " + str(re)
+        logging.error(msg)
+        print(re)
+        exit(0)
     except Exception as e:
         easygui.msgbox("Maybe the username or password is wrong or you are using personal mail.\nMake sure you are using institutional/organizational\n mail with \"allow less secure apps\" turned on","Error")
         msg = "USER: " + os.getlogin() + ", " + str(e)
